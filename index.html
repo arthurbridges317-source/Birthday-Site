@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Birthday</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial;
+            background: #000;
+            color: white;
+        }
+
+        /* pink glow background */
+        .bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255, 0, 150, 0.25), transparent 40%),
+                radial-gradient(circle at 80% 60%, rgba(255, 120, 200, 0.20), transparent 45%),
+                radial-gradient(circle at 50% 100%, rgba(255, 0, 180, 0.15), transparent 50%);
+            z-index: -1;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 64px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+
+        .section {
+            max-width: 700px;
+            margin: auto;
+            padding: 120px 20px;
+        }
+
+        .step {
+            margin: 26px 0;
+            font-size: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease;
+        }
+
+        .step.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cutoff {
+            margin: 140px 0;
+            text-align: center;
+        }
+
+        .imageReveal {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 1.2s ease;
+        }
+
+        .imageReveal.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        img {
+            width: 80%;
+            max-width: 420px;
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(255, 0, 150, 0.4);
+        }
+
+        .caption {
+            margin-top: 12px;
+            font-size: 18px;
+            opacity: 0.8;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 100px 20px;
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        button {
+            padding: 16px 28px;
+            font-size: 18px;
+            margin: 10px;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<div class="hero">
+    <div class="title">Birthday</div>
+    <div class="subtitle">a quiet sequence of moments</div>
+</div>
+
+<div class="section" id="steps"></div>
+
+<!-- IMAGE CUTOFF 1 -->
+<div class="cutoff">
+    <div class="imageReveal">
+        <img src="mum1.jpg">
+        <div class="caption">a beginning</div>
+    </div>
+</div>
+
+<div class="section"></div>
+
+<!-- IMAGE CUTOFF 2 -->
+<div class="cutoff">
+    <div class="imageReveal">
+        <img src="mum2.jpg">
+        <div class="caption">a memory that stays warm</div>
+    </div>
+</div>
+
+<div class="section"></div>
+
+<!-- IMAGE CUTOFF 3 -->
+<div class="cutoff">
+    <div class="imageReveal">
+        <img src="mum3.jpg">
+        <div class="caption">still her</div>
+    </div>
+</div>
+
+<!-- FINAL SECTION -->
+<div style="text-align:center; padding: 120px 20px;">
+
+    <h2 style="font-size: 34px; margin-bottom: 10px;">
+        Final Offer
+    </h2>
+
+    <p style="opacity:0.7; margin-bottom: 50px;">
+        Please choose your parenting experience for this year.
+    </p>
+
+    <button onclick="alert('Purchase successful 💖 Extra effort has been unlocked. Cake priority enabled.')"
+        style="background: linear-gradient(90deg, #ff2ea6, #ff77d6);">
+        Pay £599.99 for Enhanced Family Effort
+    </button>
+
+    <button onclick="alert('Parenting Pro activated 💖 7-day premium support trial enabled.')"
+        style="background: linear-gradient(90deg, #ff77d6, #ffb3ec);">
+        Activate Parenting Pro (7-day trial)
+    </button>
+
+    <div style="margin-top:60px; font-size:18px; opacity:0.75;">
+        Thank you for choosing the premium emotional support experience 🎂💖
+    </div>
+
+</div>
+
+<script>
+const steps = [
+"Begin gently.",
+"Let the day unfold without pressure.",
+"Notice what is already good.",
+"Take your time with everything.",
+"Small things matter more than they seem.",
+"Rest is part of moving forward.",
+"Nothing needs to be rushed.",
+"Let moments arrive fully.",
+"Pay attention to warmth.",
+"Keep things simple.",
+"Let quiet thoughts stay longer.",
+"Be where you are.",
+"That is enough.",
+"Continue slowly.",
+"Notice light where it appears.",
+"Let the rest fade slightly into the background.",
+"Carry only what feels light.",
+"Pause without reason.",
+"Appreciate what is here.",
+"Move forward softly."
+];
+
+const container = document.getElementById("steps");
+
+steps.forEach(text => {
+    const div = document.createElement("div");
+    div.className = "step";
+    div.textContent = text;
+    container.appendChild(div);
+});
+
+/* scroll reveal */
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
+    });
+});
+
+document.querySelectorAll(".step, .imageReveal").forEach(el => {
+    observer.observe(el);
+});
+</script>
+
+</body>
+</html>
